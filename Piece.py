@@ -6,10 +6,14 @@ class Piece():
         self.power=power
         self.name=name
 
-    def move(self,newPosition):
-        raise notimplementederror
+    def move(self,newPosition,board):
+        if vaildMove(self,newPosition,board):
+            self.position=newPosition
+            return True
+        else:
+            return False
 
-    def vaildMove(self,newPosition):
+    def vaildMove(self,newPosition,board):
         raise notimplementederror
 
     def __str__(self,powerLevel=False):
