@@ -8,10 +8,10 @@ class Bishop(Piece):
     #whether or not the piece can move to the new position legally
     def isValidMove(self, board, newPosn):
         #defining for readability
-        oldCol = self.posn[0]
-        newCol = newPosn[0]
-        oldRow = self.posn[1]
-        newRow = newPosn[1]
+        oldCol = self.posn[1]
+        newCol = newPosn[1]
+        oldRow = self.posn[0]
+        newRow = newPosn[0]
         WIDTH = len(board[0])
         HEIGHT = len(board)
 
