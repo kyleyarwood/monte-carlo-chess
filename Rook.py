@@ -1,8 +1,7 @@
 class Rook(Piece):
 
     def __init__(self, colour, posn):
-        Piece.__init__(colour, posn)
-        self.power = 5
+        Piece.__init__(colour, posn, 5, "R")
 
     def isValidMove(self, board, newPosn):
         oldCol = self.posn[1]
