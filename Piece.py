@@ -18,7 +18,8 @@ class Piece():
 
     def __str__(self, powerLevel = False):
         if powerLevel:
-            return str(self.power)
+            #force string to be length two
+            return ("0"+str(self.power))[:-2]
         else:
             if self.colour == "white":
                 return self.name.upper()
