@@ -1,8 +1,7 @@
 class Bishop(Piece):
 
     def __init__(self, colour, posn):
-        Piece.__init(colour, posn)
-        self.power = 3
+        Piece.__init(colour, posn,3,"B")
 
     #takes in the chessboard and the new position and returns
     #whether or not the piece can move to the new position legally
