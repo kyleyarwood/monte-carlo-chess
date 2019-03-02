@@ -1,5 +1,6 @@
 class Rook(Piece):
 
+    #SHOULD NOT BE MERGED
     def __init__(self, colour, posn):
         Piece.__init__(colour, posn)
         self.power = 5
