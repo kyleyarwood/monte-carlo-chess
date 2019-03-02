@@ -6,8 +6,10 @@ class Pawn(Piece):
         self.isFirstMove = True
 
     def isValidMove(self, newPosn):
-        '''implement en passant,
+        '''
+        implement en passant,
         double stepping on first move,
         and attacking diagonally, as well
         as regular moving and promotion
+        '''
 
