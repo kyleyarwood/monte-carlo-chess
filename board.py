@@ -1,17 +1,25 @@
 from random import random
 Class Board():
+
     BOARD_SIZE = 8
+
 	def __init__(self, colour,Posin):
         self.chessBoard = [[""] * BOARD_SIZE] * BOARD_SIZE
         self.players = []
 
     def move(self, currPosin,newPosin):
+        """ Paramters: Takes the current location of a peice and new location of the pieace
+            Return: a list on whether the move was successful, if there is an attack whether the attack was successful parameters
+        """
+        assert len(currPosin) = 2, "currPosin should have length 2"
+        assert len(newPosin) = 2, "newPosin should have length 2"
+
         if chessBoard[currPosin[0]][currPosin[1]].move(newPosin,self):
             if chessBoard[newPosin[0]][newPosin[1]] == "":
                 #Successfully moved to empty square
                 chessBoard[newPosin[0]][newPosin[1]] = chessBoard[currPosin[0]][currPosin[1]]
                 chessBoard[currPosition[0]][currPosition[1]] = ""
-                return [True]
+                return [True,None]
             else:
                 if self.attack(chessBoard[currPosin[0]][currPosin[1]],newPosin[0]][newPosin[1]):
                     #Successfully moved to non-square and won
@@ -26,7 +34,7 @@ Class Board():
 
         else:
             #Invaild move
-            return [False]
+            return [False,None]
 
     def setup():
         pass
@@ -44,12 +52,6 @@ Class Board():
             self.delete(attacker)
             return False
 
-    def delete(self, piece):
-        if chessBoard[piece.posin[0]][piece.posin[1]] != "":
-            chessBoard[piece.posin[0]][piece.posin[1]] = ""
-            return True
-        else:
-            False
     def __str__(self,powerlevel=False):
         boardStr = ""
         for i in self.chessBoard:
