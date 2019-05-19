@@ -1,6 +1,7 @@
 class Piece():
 
     def __init__(self, colour, posn, power, name):
+        assert len(name) == 1, "The length of the name must be only one character"
         self.colour = colour
         self.posn = posn
         self.power = power
@@ -16,12 +17,12 @@ class Piece():
     def vaildMove(self, newPosn, board):
         raise NotImplementedError
 
-    def __str__(self, powerLevel = False):
+    def __str__(self, powerLevel=False):
         if powerLevel:
-            #force string to be length two
-            return ("0"+str(self.power))[:-2]
+            # force string to be length two
+            return str(self.power)
         else:
-            if self.colour == "white":
+            if self.colour == "W":
                 return self.name.upper()
             else:
                 return self.name.lower()
