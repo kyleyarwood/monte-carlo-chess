@@ -8,7 +8,7 @@ Class Board():
         self.players = []
 
     def move(self, currPosin,newPosin):
-        """ Paramters: Takes the current location of a peice and new location of the pieace
+        """ Parameters: Takes the current location of a piece and new location of the piece
             Return: a list on whether the move was successful, if there is an attack whether the attack was successful parameters
         """
         assert len(currPosin) = 2, "currPosin should have length 2"
@@ -53,6 +53,8 @@ Class Board():
             return False
 
     def __str__(self,powerlevel=False):
+        """Print the board. By defult, prints the peice names. If powerlevel is True, next prints the power level.
+        """
         boardStr = ""
         for i in self.chessBoard:
             row = ""
@@ -60,7 +62,7 @@ Class Board():
                 if j == "":
                     row += " "
                 else:
-                    row += str(j,powerlevel)
+                    row += j.str(powerlevel)
             row += "/n"
             boardSt += row
         return boardSt
