@@ -8,34 +8,34 @@ class Rook(Piece):
         Piece.__init__(colour, posn)
         self.power = 5
 
-    def isValidMove(self, board, newPosn):
-        oldCol = self.posn[1]
-        newCol = newPosn[1]
-        oldRow = self.posn[0]
-        newRow = newPosn[0]
+    def isValidMove(self, new_posn, board):
+        old_col = self.posn[1]
+        new_col = new_posn[1]
+        old_row = self.posn[0]
+        new_row = new_posn[0]
 
         WIDTH = len(board[0])
         HEIGHT = len(board)
 
-        # make sure newPosn is on the board
-        if newRow >= HEIGHT or newRow < 0 or newCol >= WIDTH or newCol < 0:
+        # make sure new_posn is on the board
+        if new_row >= HEIGHT or new_row < 0 or new_col >= WIDTH or new_col < 0:
             return False
 
-        horizontal = bool(newRow == oldRow)
-        vertical = bool(newCol == oldCol)
+        horizontal = bool(new_row == old_row)
+        vertical = bool(new_col == old_col)
 
         if horizontal:
 
-            for i in range(min(oldCol, newCol) + 1, max(oldCol, newCol)):
-                if board[newRow][i]:
+            for i in range(min(old_col, new_col) + 1, max(old_col, new_col)):
+                if board[new_row][i]:
                     return False
             else:
                 return True
 
         elif vertical:
 
-            for i in range(min(oldRow, newRow) + 1, max(oldRow, newRow)):
-                if board[i][newCol]:
+            for i in range(min(old_row, new_row) + 1, max(old_row, new_row)):
+                if board[i][new_col]:
                     return False
             else:
                 return True
