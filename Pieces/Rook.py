@@ -1,6 +1,9 @@
+from . import Piece
+
+
 class Rook(Piece):
 
-    #SHOULD NOT BE MERGED
+    # SHOULD NOT BE MERGED
     def __init__(self, colour, posn):
         Piece.__init__(colour, posn)
         self.power = 5
@@ -14,7 +17,7 @@ class Rook(Piece):
         WIDTH = len(board[0])
         HEIGHT = len(board)
 
-        #make sure newPosn is on the board
+        # make sure newPosn is on the board
         if newRow >= HEIGHT or newRow < 0 or newCol >= WIDTH or newCol < 0:
             return False
 
@@ -22,13 +25,13 @@ class Rook(Piece):
         vertical = bool(newCol == oldCol)
 
         if horizontal:
-        
+
             for i in range(min(oldCol, newCol) + 1, max(oldCol, newCol)):
                 if board[newRow][i]:
                     return False
             else:
                 return True
-        
+
         elif vertical:
 
             for i in range(min(oldRow, newRow) + 1, max(oldRow, newRow)):
@@ -36,8 +39,6 @@ class Rook(Piece):
                     return False
             else:
                 return True
-        
+
         else:
             return False
-
-

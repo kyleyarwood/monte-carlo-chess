@@ -1,12 +1,15 @@
+from .piece import Piece
+
+
 class Bishop(Piece):
 
     def __init__(self, colour, posn):
-        Piece.__init(colour, posn,3,"B")
+        Piece.__init__(self, colour, posn, 3, "B")
 
-    #takes in the chessboard and the new position and returns
-    #whether or not the piece can move to the new position legally
+    # takes in the chessboard and the new position and returns
+    # whether or not the piece can move to the new position legally
     def isValidMove(self, board, newPosn):
-        #defining for readability
+        # defining for readability
         oldCol = self.posn[1]
         newCol = newPosn[1]
         oldRow = self.posn[0]
@@ -14,22 +17,20 @@ class Bishop(Piece):
         WIDTH = len(board[0])
         HEIGHT = len(board)
 
-        #check that newPosn is on the board
+        # check that newPosn is on the board
         if newRow < 0 or newRow >= HEIGHT or newCol < 0 or newCol >= HEIGHT:
             return False
 
-        #check for positive slope move
+        # check for positive slope move
         posSlope = bool(newRow - oldRow == newCol - oldCol)
 
-        #check for negative slope move
+        # check for negative slope move
         negSlope = bool(newRow - oldRow == -(newCol - oldCol))
-
 
         minRow, maxRow = min(oldRow, newRow), max(oldRow, newRow)
         minCol, maxCol = min(oldCol, newCol), max(oldCol, newCol)
 
-
-        #check to see if anything is in between old position and new position
+        # check to see if anything is in between old position and new position
         if posSlope:
 
             for i in range(minCol + 1, maxCol):
@@ -38,9 +39,9 @@ class Bishop(Piece):
                         return False
             else:
                 return True
-        
+
         elif negSlope:
-        
+
             for i in range(minCol + 1, maxCol):
                 for j in range(minRow + 1, maxRow):
                     if board[i][j]:
@@ -50,4 +51,3 @@ class Bishop(Piece):
 
         else:
             return False
-        

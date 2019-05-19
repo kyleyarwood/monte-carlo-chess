@@ -1,5 +1,8 @@
+import Piece
+
+
 class Pawn(Piece):
-    
+
     def __init__(self, colour, posn):
         Piece.__init__(colour, posn)
         self.power = 1
@@ -12,4 +15,3 @@ class Pawn(Piece):
         and attacking diagonally, as well
         as regular moving and promotion
         '''
-
