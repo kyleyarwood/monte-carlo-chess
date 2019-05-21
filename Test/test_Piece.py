@@ -11,7 +11,7 @@ class test_Piece(unittest.TestCase):
     # name must be W or B
     def test_name_not_W_or_B(self):
         colour = "X"
-        self.assertRaises(AssertionError, Piece, colour, [1, 1], 5, "B")
+        self.assertRaises(ValueError, Piece, colour, [1, 1], 5, "B")
 
     def test_name_W(self):
         colour = "W"
@@ -60,11 +60,11 @@ class test_Piece(unittest.TestCase):
 
     def test_power_not_int(self):
         power = 5.1
-        self.assertRaises(AssertionError, Piece, "W", [1, 1], power, "B")
+        self.assertRaises(TypeError, Piece, "W", [1, 1], power, "B")
 
     def test_power_non_not_negtive(self):
         power = -5
-        self.assertRaises(AssertionError, Piece, "W", [1, 1], power, "B")
+        self.assertRaises(ValueError, Piece, "W", [1, 1], power, "B")
 
     def test_power_int(self):
         power = 5

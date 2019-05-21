@@ -1,3 +1,4 @@
-from monte_carlo_chess.Pieces.piece import Piece
+import monte_carlo_chess
 
-Piece("White", [1, 1], 5, "B")
+x = Piece("W", [1, 1], 5, "B")
+print(x)
