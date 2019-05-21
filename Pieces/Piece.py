@@ -6,19 +6,21 @@ class Piece():
         self.posn = posn
         self.power = power
         self.name = name
+        self.has_moved = False
 
-    def move(self, newPosn, board):
-        if vaildMove(self, newPosn, board):
-            self.posn = newPosn
+    def move(self, new_posn, board):
+        if vaildMove(self, new_posn, board):
+            self.posn = new_posn
+            self.has_moved = True
             return True
         else:
             return False
 
-    def vaildMove(self, newPosn, board):
+    def vaildMove(self, new_posn, board):
         raise NotImplementedError
 
-    def __str__(self, powerLevel=False):
-        if powerLevel:
+    def __str__(self, power_level=False):
+        if power_level:
             # force string to be length two
             return str(self.power)
         else:

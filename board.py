@@ -9,40 +9,40 @@ class Board():
             ["" for i in range(self.BOARD_SIZE)] for i in range(self.BOARD_SIZE)]
         self.players = []
 
-    def move(self, currPosin, newPosin):
+    def move(self, curr_posn, new_posn):
         """ Parameters: Takes the current location of a piece and new location of the piece
             Return: a list on whether the move was successful, if there is an attack whether the attack was successful parameters
         """
-        assert len(currPosin) == 2, "currPosin should have length 2"
-        assert len(newPosin) == 2, "newPosin should have length 2"
+        assert len(curr_posn) == 2, "curr_posn should have length 2"
+        assert len(new_posn) == 2, "new_posn should have length 2"
 
-        if chessBoard[currPosin[0]][currPosin[1]].move(newPosin, self):
-            if chessBoard[newPosin[0]][newPosin[1]] == "":
+        if chessBoard[curr_posn[0]][curr_posn[1]].move(new_posn, self):
+            if chessBoard[new_posn[0]][new_posn[1]] == "":
                 # Successfully moved to empty square
-                chessBoard[newPosin[0]][newPosin[1]
-                                        ] = chessBoard[currPosin[0]][currPosin[1]]
-                chessBoard[currPosition[0]][currPosition[1]] = ""
+                chessBoard[new_posn[0]][new_posn[1]
+                                        ] = chessBoard[curr_posn[0]][curr_posn[1]]
+                chessBoard[curr_posn[0]][curr_posn[1]] = ""
                 return [True, None]
             else:
-                if self.attack(chessBoard[currPosin[0]][currPosin[1]], newPosin):
+                if self.attack(chessBoard[curr_posn[0]][curr_posn[1]], new_posn):
                     # Successfully moved to non-empty square and won
-                    chessBoard[newPosin[0]][newPosin[1]] = piece
-                    chessBoard[currPosin[0]][currPosin[1]] = ""
+                    chessBoard[new_posn[0]][new_posn[1]] = piece
+                    chessBoard[curr_posn[0]][curr_posn[1]] = ""
                     return [True, True]
                 else:
-                    # Successfully moved to non-square and lose
-                    chessBoard[currPosin[0]][currPosin[1]] = ""
+                    # Successfully moved to non-empty square and lost
+                    chessBoard[curr_posn[0]][curr_posn[1]] = ""
                     return [True, False]
 
         else:
-            # Invaild move
+            # Invalid move
             return [False, None]
 
     def setup():
         pass
 
-    def attack(self, attackerPosin, defenderPosin):
-        """Determines which piece wins and deltes the loser
+    def attack(self, attacker, defender):
+        """Determines which piece wins and deletes the loser
         """
         probWin = attacker.power / (attacker.power + defender.power)
         if random() < probWin:
@@ -81,8 +81,8 @@ class Board():
             str("".join(map(lambda x: x + " ", letters)))
         return board_str
 
-    def __getitem__(self, Posin):
-        return self.chessBoard[Posin[0]][Posin[1]]
+    def __getitem__(self, posn):
+        return self.chessBoard[posn[0]][posn[1]]
 
-    def __setitem__(self, Posin, piece):
-        self.chessBoard[Posin[0]][Posin[1]] = piece
+    def __setitem__(self, posn, piece):
+        self.chessBoard[posn[0]][posn[1]] = piece
