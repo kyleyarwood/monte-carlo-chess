@@ -1,44 +1,39 @@
 from . import Piece
+from .. import utility
 
 
 class Rook(Piece):
 
-    # SHOULD NOT BE MERGED
-    def __init__(self, colour, posn):
-        Piece.__init__(colour, posn)
-        self.power = 5
+    def __init__(self, colour):
+        Piece.__init__(colour, 5, "R")
 
-    def isValidMove(self, new_posn, board):
+    def isValidMove(self, curr_posn, new_posn, board):
         old_col = self.posn[1]
         new_col = new_posn[1]
         old_row = self.posn[0]
         new_row = new_posn[0]
 
-        WIDTH = len(board[0])
-        HEIGHT = len(board)
-
-        # make sure new_posn is on the board
-        if new_row >= HEIGHT or new_row < 0 or new_col >= WIDTH or new_col < 0:
+        # new_posn on board
+        if not utility.is_on_board(new_posn):
             return False
 
-        horizontal = bool(new_row == old_row)
-        vertical = bool(new_col == old_col)
+        # move not straight
+        if old_col != new_col and old_row != old_row:
+            return False
 
-        if horizontal:
+        # horizontal
+        if bool(new_row == old_row):
 
             for i in range(min(old_col, new_col) + 1, max(old_col, new_col)):
-                if board[new_row][i]:
+                if board[new_row][i] = "":
                     return False
             else:
                 return True
-
-        elif vertical:
+        # vertical
+        else:
 
             for i in range(min(old_row, new_row) + 1, max(old_row, new_row)):
-                if board[i][new_col]:
+                if board[i][new_col] = "":
                     return False
             else:
                 return True
-
-        else:
-            return False

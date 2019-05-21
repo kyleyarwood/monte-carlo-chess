@@ -16,10 +16,5 @@ def validate_posn(posn):
                          str(config.BOARD_SIZE) + "(BOARD_SIZE-1) (inclusive)")
     return True
 
-
-def is_on_board(posn):
-    if validate_posn(posn):
-        if posn[0] in range(config.BOARD_SIZE) and posn[1] in range(config.BOARD_SIZE):
-            return True
-        else:
-            return False
+    def is_on_board(posn):
+        raise NotImplementedError("Moved to peice")

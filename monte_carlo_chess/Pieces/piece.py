@@ -1,9 +1,6 @@
 class Piece():
 
-    def __init__(self, colour, posin, power, name):
-        print(dir())
-        if not validate_posn(posin):
-            raise Exception()
+    def __init__(self, colour, power, name):
 
         if not colour == "W" and not colour == "B":
             raise ValueError("name must be either 'W' or 'B'")
@@ -21,20 +18,32 @@ class Piece():
             ValueError("name must be an character")
 
         self.colour = colour
-        self.posin = posin
         self.power = power
-        self.name = name.lower()
+        self.name = name.upper()
+        self.has_moved = False
 
-    def move(self, newPosin, board):
+    def move(self, curr_posn, new_posn, board):
 
-        if vaildMove(self, newPosin, board):
-            self.Posin = newPosin
+        if vaildMove(self, curr_posn, new_posn, board):
+            self.has_moved = True
             return True
         else:
             return False
 
-    def vaildMove(self, newPosin, board):
+    def vaildMove(self, curr_posn, new_posn, board):
         raise NotImplementedError
+
+    def is_on_board(posn):
+        if validate_posn(posn):
+            if posn[0] in range(config.BOARD_SIZE) and posn[1] in range(config.BOARD_SIZE):
+                return True
+            else:
+                return False
+
+    def same_colour_in_spot(posn, board):
+        if board[posn] or board[posn].colour != self.colour:
+            return True
+        return False
 
     def __str__(self, powerLevel=False):
         """
