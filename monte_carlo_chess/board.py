@@ -5,7 +5,7 @@ import utility
 
 class Board():
 
-    def __init__(self):
+    def __init__(self, all pieces):
         self.chessBoard = [
             ["" for i in range(BOARD_SIZE)] for i in range(BOARD_SIZE)]
         self.players = []
@@ -74,7 +74,7 @@ class Board():
         for row, i in zip(reversed(self.chessBoard), range(len(self.chessBoard) + 1, 1, -1)):
             row_str = str(i) + "|"
             for col, j in zip(row, letters):
-                if col == "":
+                if col:
                     row_str += " |"
                 else:
                     row_str += col.__str__(powerlevel) + "|"
@@ -101,6 +101,6 @@ class Board():
         def generator(self, board, name=None):
             for i in self.chessboard:
                 for j in i:
-                    if j != "" and (name is None or j.name=name):
+                    if not j and (name is None or j.name=name):
                         yield j
         return generator(self, name)

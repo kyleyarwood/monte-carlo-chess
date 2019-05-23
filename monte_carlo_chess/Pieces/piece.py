@@ -67,3 +67,8 @@ class Piece():
                 return self.name.upper()
             else:
                 return self.name.lower()
+
+
+class BadMoveError(Exception):
+    "Move not possible"
+    pass
