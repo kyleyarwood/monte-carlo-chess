@@ -1,4 +1,5 @@
-import monte_carlo_chess
+from monte_carlo_chess.board import Board
+import pdb
 
-x = Piece("W", [1, 1], 5, "B")
-print(x)
+b = Board()
+print(b.setup())
