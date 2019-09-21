@@ -58,15 +58,16 @@ class King(Piece):
 
             if self.isValidMove(self, curr_posn, new_posn, board):
                 # is castling
+                target_rook_posn = None
                 if (
                     abs(new_posn[1] - self.curr_posn[1])
                     + abs(new_posn[0] - self.curr_posn[0])
                     != 1
                 ):
                     if new_posn[1] == 2:
-                        target_rook_posn = [new_posn[0], 0]
+                        target_rook_posn = Posn(new_posn[0], 0)
                     elif new_posn[1] == 6:
-                        target_rook_posn = [new_posn[0], 7]
+                        target_rook_posn = Posn(new_posn[0], 7)
                     else:
                         #should never happen
                         raise BadMoveError("Castling but King is not correct position")
@@ -77,11 +78,11 @@ class King(Piece):
 
                     if not board[target_rook_posn].move(
                         target_rook_posn,
-                        [target_rook_posn[0], 3 if val == 2 else 5],
+                        Posn(target_rook_posn[0], 3 if val == 2 else 5),
                         board,
                     ):
                         raise BadMoveError("Castling but Rook can not be moved")
-
+                board.move(target_rook_posn, Posn(target_rook_posn[0], 3 if val == 2 else 5))
                 self.has_moved = True
                 return True
             else:
