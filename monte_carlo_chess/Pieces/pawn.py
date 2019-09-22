@@ -5,7 +5,7 @@ class Pawn(Piece):
     def __init__(self, colour):
         Piece.__init__(self, colour, 1, "P")
 
-    def isValidMove(self, new_posn, board):
+    def is_valid_move(self, new_posn, board):
         """
         implement en passant,
         double stepping on first move,
@@ -30,12 +30,11 @@ class Pawn(Piece):
         elif (
             abs(new_posn[1] - self.posn[1]) == 1
             and new_posn[0] == self.posn[0] - moving_direction
+            and board[new_posn[0]][new_posn[1]]
+            and not utility.same_colour_in_spot(new_posn, board, self.colour)
         ):
             # attacking a piece
-            if board[new_posn[0]][new_posn[1]]:
-                return True
-            else:
-                return False
+            return True
         elif (
             not self.has_moved
             and new_posn[1] == self.posn[1]
@@ -48,10 +47,15 @@ class Pawn(Piece):
             ):
                 return False
             else:
+                board.en_passantable_posn = new_posn
                 return True
-        elif False:
-            # en passant
-            # TODO implement this
-            return False
+        elif (
+            abs(new_posn[1] - self.posn[1]) == 1
+            and new_posn[0] == self.posn[0] - moving_direction
+            and Posn(self.posn[0], new_posn[1]) == board.en_passantable_posn:
+            and not utility.same_colour_in_spot(new_posn, board, self.colour)
+        ):
+            #en passant
+            return True
         else:
             return False

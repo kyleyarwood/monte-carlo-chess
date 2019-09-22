@@ -6,7 +6,7 @@ class King(Piece):
     def __init__(self, colour):
         Piece.__init__(self, colour, 4, "K")
 
-    def isValidMove(self, curr_posn, new_posn, board):
+    def is_valid_move(self, curr_posn, new_posn, board):
 
         if not utility.is_on_board(new_posn) or utility.same_colour_in_spot(new_posn)
             or self.can_be_attacked(new_posn, board):
@@ -56,7 +56,7 @@ class King(Piece):
 
         def move(self, curr_posn, new_posn, board):
 
-            if self.isValidMove(self, curr_posn, new_posn, board):
+            if self.is_valid_move(self, curr_posn, new_posn, board):
                 # is castling
                 target_rook_posn = None
                 if (

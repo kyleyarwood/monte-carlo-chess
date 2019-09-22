@@ -27,13 +27,16 @@ class Piece:
         self.has_moved = False
 
     def move(self, curr_posn: Posn, new_posn: Posn, board):
-        if vaildMove(self, curr_posn, new_posn, board):
+        if (
+            not utility.same_colour_in_spot(new_posn, board, self.colour) 
+            and self.is_valid_move(curr_posn, new_posn, board)
+        ):
             self.has_moved = True
             return True
         else:
             return False
 
-    def vaildMove(self, curr_posn, new_posn, board):
+    def is_valid_move(self, curr_posn, new_posn, board):
         raise NotImplementedError
 
     def __str__(self, powerLevel=False):

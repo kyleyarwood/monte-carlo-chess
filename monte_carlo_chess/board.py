@@ -20,7 +20,7 @@ class Board:
             [None for i in range(self.BOARD_SIZE)] for i in range(BOARD_SIZE)
         ]
         self.player_turn = "W"
-        self.last_move = []  # peice
+        self.en_passanted_posn = None #if the last move was en passant, where did it occur
 
     def move(self, curr_posn, new_posn):
         """ Parameters: Takes the current location of a piece and new location of the piece
