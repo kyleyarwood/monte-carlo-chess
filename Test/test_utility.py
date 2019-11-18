@@ -5,7 +5,7 @@ from monte_carlo_chess.posn import Posn
 import monte_carlo_chess.config as config
 
 
-class test_utiliity(unittest.TestCase):
+class test_utility(unittest.TestCase):
     def test_is_on_board_row_neg(self):
         row = -1
         posn = Posn(row, config.BOARD_SIZE // 2)
