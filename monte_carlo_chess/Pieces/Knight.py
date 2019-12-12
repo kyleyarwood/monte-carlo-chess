@@ -9,7 +9,7 @@ class Knight(Piece):
     def isValidMove(self, curr_posn, new_posn, board):
         # euclidean distance between curr_posn and new_posn must be sqrt()
         return (
-            is_on_board(new_posn)
+            utility.is_on_board(new_posn)
             and not utility.same_colour_in_spot(new_posn, board, self.colour)
             and (
                 (new_posn[1] - self.curr_posn[1]) ** 2
