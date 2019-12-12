@@ -90,11 +90,12 @@ class Board:
         print(self)
 
     def attack(self, attacker, defender):
-        """ Deciding if the attacking piece wins. The winner's powerlevel is incremnted by the loser's powerlevel The probabilities that attacking piece is the attacker's power / (attacker's power + defender's power)
+        """ Deciding if the attacking piece wins. The winner's powerlevel is incremented by the loser's powerlevel. 
+            The probability that the attacking piece captures is a/(a+b), where a is the attacker's power and b is the defender's power. 
 
             Parameters:
-                attacker(Piece) : Piece that is attacking (ie moving to the postion of the defending piece)
-                defender(Piece) : Piece that defending (ie piece that is at the postion that the attacking piece is moving to)
+                attacker(Piece) : Piece that is attacking (ie moving to the position of the defending piece)
+                defender(Piece) : Piece that defending (ie piece that is at the position  that the attacking piece is moving to)
 
             Returns:
                 bool : True if the attacker wins, False if the defender wins
@@ -141,7 +142,7 @@ class Board:
                 posn(Posn) : Position of piece to be returned
 
             Returns:
-                piece : The peice which is selected
+                piece : The piece which is selected
 
             Raises:
                 IndexError: If the posn is not on the board
