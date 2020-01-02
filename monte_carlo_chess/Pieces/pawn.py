@@ -1,5 +1,6 @@
-from .piece import Piece
-
+from monte_carlo_chess.Pieces.piece import Piece
+from monte_carlo_chess import utility
+from monte_carlo_chess.posn import Posn
 
 class Pawn(Piece):
     def __init__(self, colour):
@@ -52,7 +53,7 @@ class Pawn(Piece):
         elif (
             abs(new_posn[1] - self.posn[1]) == 1
             and new_posn[0] == self.posn[0] - moving_direction
-            and Posn(self.posn[0], new_posn[1]) == board.en_passantable_posn:
+            and Posn(self.posn[0], new_posn[1]) == board.en_passantable_posn
             and not utility.same_colour_in_spot(new_posn, board, self.colour)
         ):
             #en passant

@@ -55,7 +55,6 @@ class Piece:
 
         if powerLevel:
             raise ValueError("powerLevel must be less than 100")
-            return str(self.power)
         else:
             if self.colour == "W":
                 return self.name.upper()

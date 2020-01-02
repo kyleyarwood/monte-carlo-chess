@@ -17,7 +17,7 @@ HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 class Board:
     def __init__(self):
         self.chessBoard = [
-            [None for i in range(self.BOARD_SIZE)] for i in range(BOARD_SIZE)
+            [None for i in range(BOARD_SIZE)] for i in range(BOARD_SIZE)
         ]
         self.player_turn = "W"
         self.en_passanted_posn = None #if the last move was en passant, where did it occur
@@ -36,7 +36,7 @@ class Board:
                 self.chessBoard[curr_posn[0]][curr_posn[1]] = None
                 return [True]
             else:
-                if self.attack(piece, chessBoard[new_posn[0]][new_posn[1]]):
+                if self.attack(piece, self.chessBoard[new_posn[0]][new_posn[1]]):
                     # Successfully moved to non-empty square and won
                     self.chessBoard[new_posn[0]][new_posn[1]] = piece
                     self.chessBoard[new_posn[0]][new_posn[1]].posn = new_posn
@@ -51,35 +51,35 @@ class Board:
             # Invalid move
             return [False]
 
-        def turn(self, curr_posn: Posn, new_posn: Posn):
-            if not utility.is_on_board(curr_posn):
-                raise IndexError(
-                    f"Board has size {self.BOARD_SIZE}. curr_posn is not chessBoard"
-                )
+    def turn(self, curr_posn: Posn, new_posn: Posn):
+        if not utility.is_on_board(curr_posn):
+            raise IndexError(
+                f"Board has size {BOARD_SIZE}. curr_posn is not chessBoard"
+            )
 
-            if not utility.is_on_board(new_posn):
-                raise IndexError(
-                    f"Board has size {self.BOARD_SIZE}. new_posn is not chessBoard"
-                )
+        if not utility.is_on_board(new_posn):
+            raise IndexError(
+                f"Board has size {BOARD_SIZE}. new_posn is not chessBoard"
+            )
 
-            if chessBoard[curr_posn[0]][curr_posn[1]] is None:
-                raise ValueError(f"({curr_posn[0]},{curr_posn[1]}) is empty.")
+        if chessBoard[curr_posn[0]][curr_posn[1]] is None:
+            raise ValueError(f"({curr_posn[0]},{curr_posn[1]}) is empty.")
 
-            if chessBoard[curr_posn[0]][curr_posn[1]].colour != self.player_turn:
-                # Expand colour name?
-                raise ValueError(
-                    f"The piece at ({curr_posn[0]},{curr_posn[1]}) is {chessBoard[curr_posn[0]][curr_posn[1]].colour}, it is {self.player_turn}'s turn to move'"
-                )
+        if chessBoard[curr_posn[0]][curr_posn[1]].colour != self.player_turn:
+            # Expand colour name?
+            raise ValueError(
+                f"The piece at ({curr_posn[0]},{curr_posn[1]}) is {chessBoard[curr_posn[0]][curr_posn[1]].colour}, it is {self.player_turn}'s turn to move'"
+            )
 
-            piece = curr_posn
+        piece = curr_posn
 
-            if self.player_turn == "W":
-                self.player_turn = "B"
-            elif self.player_turn == "B":
-                self.player_turn = "W"
-            else:
-                pass
-                # raise error invalid player_turn
+        if self.player_turn == "W":
+            self.player_turn = "B"
+        elif self.player_turn == "B":
+            self.player_turn = "W"
+        else:
+            pass
+            # raise error invalid player_turn
 
     def setup(self):
         for i in range(0, BOARD_SIZE):

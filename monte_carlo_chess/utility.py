@@ -9,7 +9,7 @@ def is_on_board(posn: Posn):
 
 
 def same_colour_in_spot(posn, board, colour):
-    return board[posn] is not none and board[posn].colour == colour
+    return board[posn] is not None and board[posn].colour == colour
 
 
 # sqaures between but not including curr_posn and new_posn
@@ -25,12 +25,12 @@ def path(
 
     if not is_on_board(curr_posn):
         raise IndexError(
-            f"Board has size {self.BOARD_SIZE}. curr_posn is not chessBoard"
+            f"Board has size {config.BOARD_SIZE}. curr_posn is not chessBoard"
         )
 
     if not is_on_board(new_posn):
         raise IndexError(
-            f"Board has size {self.BOARD_SIZE}. new_posn is not chessBoard"
+            f"Board has size {config.BOARD_SIZE}. new_posn is not chessBoard"
         )
 
     if curr_posn == new_posn:
@@ -66,7 +66,7 @@ def path(
         curr_posn[0] += slope[0]
         curr_posn[1] += slope[1]
 
-    def clear_path(curr_posn: Posn, new_posn: Posn, board: board, piece_colour):
-        return all(
-            map(lambda x: x is None, utility.path(curr_posn, new_posn, board))
-        ) and not same_colour_in_spot(new_posn, board, colour)
+def clear_path(curr_posn: Posn, new_posn: Posn, board: board, piece_colour):
+    return all(
+        map(lambda x: x is None, path(curr_posn, new_posn, board))
+    ) and not same_colour_in_spot(new_posn, board, piece_colour)
