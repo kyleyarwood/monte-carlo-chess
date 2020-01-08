@@ -8,5 +8,5 @@ class Bishop(Piece):
 
     # takes in the chessboard and the new position and returns
     # whether or not the piece can move to the new position legally
-    def isValidMove(self, curr_posn, new_posn, board):
+    def is_valid_move(self, curr_posn, new_posn, board):
         return utility.clear_path(curr_posn, new_posn, board, False, True)

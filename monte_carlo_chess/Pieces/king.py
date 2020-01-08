@@ -1,15 +1,17 @@
-from .piece import Piece
-from .. import utility
+from monte_carlo_chess.Pieces.piece import Piece
+from monte_carlo_chess.posn import Posn
+from monte_carlo_chess import utility
+from monte_carlo_chess.config import BOARD_SIZE
 
 # from math import abs
 class King(Piece):
     def __init__(self, colour):
         Piece.__init__(self, colour, 4, "K")
 
-    def isValidMove(self, curr_posn, new_posn, board):
+    def is_valid_move(self, curr_posn, new_posn, board):
 
-        if not utility.is_on_board(new_posn) or utility.same_colour_in_spot(new_posn)
-            or self.can_be_attacked(new_posn, board):
+        if (not utility.is_on_board(new_posn) or utility.same_colour_in_spot(new_posn, board, self.colour)
+            or self.can_be_attacked(new_posn, board)):
             return False
 
         # position changes
@@ -17,8 +19,8 @@ class King(Piece):
         delta_y = abs(new_posn[0] - self.curr_posn[0])
 
         # move of distance one
-        if (delta_x + delta_y <= 2) and (delta_x == 1 or delta_y == 1) and
-            not utility.same_colour_in_spot(new_posn):
+        if ((delta_x + delta_y <= 2) and (delta_x == 1 or delta_y == 1) and
+            not utility.same_colour_in_spot(new_posn, board, self.colour)):
             return True
 
         # castling
@@ -54,49 +56,49 @@ class King(Piece):
 
         return True
 
-        def move(self, curr_posn, new_posn, board):
+    def move(self, curr_posn, new_posn, board):
 
-            if self.isValidMove(self, curr_posn, new_posn, board):
-                # is castling
-                target_rook_posn = None
-                if (
-                    abs(new_posn[1] - self.curr_posn[1])
-                    + abs(new_posn[0] - self.curr_posn[0])
-                    != 1
+        if self.is_valid_move(self, curr_posn, new_posn, board):
+            # is castling
+            target_rook_posn = None
+            if (
+                abs(new_posn[1] - self.curr_posn[1])
+                + abs(new_posn[0] - self.curr_posn[0])
+                != 1
+            ):
+                if new_posn[1] == 2:
+                    target_rook_posn = Posn(new_posn[0], 0)
+                elif new_posn[1] == 6:
+                    target_rook_posn = Posn(new_posn[0], 7)
+                else:
+                    #should never happen
+                    raise BadMoveError("Castling but King is not correct position")
+
+                if not board[target_rook_posn]:
+                    #should never happen
+                    raise BadMoveError("Castling but Rook is not correct position")
+
+                if not board[target_rook_posn].move(
+                    target_rook_posn,
+                    Posn(target_rook_posn[0], 3 if val == 2 else 5),
+                    board,
                 ):
-                    if new_posn[1] == 2:
-                        target_rook_posn = Posn(new_posn[0], 0)
-                    elif new_posn[1] == 6:
-                        target_rook_posn = Posn(new_posn[0], 7)
-                    else:
-                        #should never happen
-                        raise BadMoveError("Castling but King is not correct position")
-
-                    if not board[target_rook_posn]:
-                        #should never happen
-                        raise BadMoveError("Castling but Rook is not correct position")
-
-                    if not board[target_rook_posn].move(
-                        target_rook_posn,
-                        Posn(target_rook_posn[0], 3 if val == 2 else 5),
-                        board,
-                    ):
-                        raise BadMoveError("Castling but Rook can not be moved")
-                board.move(target_rook_posn, Posn(target_rook_posn[0], 3 if val == 2 else 5))
-                self.has_moved = True
-                return True
-            else:
-                return False
-
-        def can_be_attacked(self, posn, board):
-
-            for row in range(BOARD_SIZE):
-                for col in range(BOARD_SIZE):
-                    if (
-                        board[(row, col)] and board[(row, col)].colour == "B"
-                        if self.colour == "W"
-                        else "W"
-                        and board[(row, col)].isValidMove((row, col), posn, board)
-                    ):
-                        return False
+                    raise BadMoveError("Castling but Rook can not be moved")
+            board.move(target_rook_posn, Posn(target_rook_posn[0], 3 if val == 2 else 5))
+            self.has_moved = True
             return True
+        else:
+            return False
+
+    def can_be_attacked(self, posn, board):
+
+        for row in range(BOARD_SIZE):
+            for col in range(BOARD_SIZE):
+                if (
+                    board[(row, col)] and board[(row, col)].colour == "B"
+                    if self.colour == "W"
+                    else "W"
+                    and board[(row, col)].isValidMove((row, col), posn, board)
+                ):
+                    return False
+        return True
