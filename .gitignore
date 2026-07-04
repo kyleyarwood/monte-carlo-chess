@@ -1,3 +1,16 @@
+# Python
 __pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
 .coverage
-run.py
+
+# Node
+node_modules/
+dist/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/

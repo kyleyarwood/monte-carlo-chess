@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: monte-carlo-chess
+    runtime: docker
+    plan: free
+    healthCheckPath: /
