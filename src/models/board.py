@@ -42,6 +42,8 @@ class Board:
         if piece.move(new_posn=new_posn, board=self):
             self.board[new_posn.row][new_posn.col] = piece
             self.board[old_posn.row][old_posn.col] = None
+            move: Move = Move(old_posn=old_posn, new_posn=new_posn, piece=piece)
+            self.moves.append(move)
             return True
         return False
 
